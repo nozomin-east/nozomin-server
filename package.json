@@ -1,0 +1,35 @@
+{
+  "name": "nozomin-server",
+  "license": "MIT",
+  "version": "0.1.0",
+  "scripts": {
+    "fblogin": "firebase login",
+    "fblogout": "firebase logout",
+    "preserve": "npm run build-funcs && npm run copy-deps && npm run install-deps",
+    "serve": "NODE_ENV=production firebase serve",
+    "predeploy": "npm run clean && npm run build-funcs && npm run copy-deps",
+    "deploy": "firebase deploy",
+    "clean": "rimraf \"dist/functions/**\"",
+    "build-funcs": "babel \"src/functions\" --out-dir \"dist/functions\"",
+    "copy-deps": "cpx \"*{package.json,package-lock.json,yarn.lock}\" \"dist/functions\" -C",
+    "install-deps": "cd \"dist/functions\" && npm i"
+  },
+  "dependencies": {
+    "apollo-server-cloud-functions": "^2.4.8",
+    "babel-polyfill": "^6.26.0",
+    "firebase-admin": "^7.1.1",
+    "firebase-functions": "^2.0.5",
+    "firebase-tools": "^4.2.1",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.10.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/runtime": "^7.1.2",
+    "cpx": "^1.5.0",
+    "prettier": "^1.14.3",
+    "rimraf": "^2.6.2"
+  }
+}
